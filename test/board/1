@@ -1,0 +1,43 @@
+package test_Board
+
+import (
+        "testing"
+        . "github.com/franela/goblin"
+        "../../src/board"
+)
+
+func Test(t *testing.T) {
+    g := Goblin(t)
+    g.Describe ("Creating a Board of any size", func() {
+	g.It("should create board size of 3", func(){
+	     game := board.Game{
+               Size: 3,
+	       AvailableSpots: 9,
+	     }
+	     b := game.Create(3) 
+	     g.Assert(len(b)).Equal(9)
+ 	})
+
+	g.It("should create a 4 size board", func() {
+	     game := board.Game{
+               Size: 4,
+	       AvailableSpots: 16,
+	     }
+	    b := game.Create(4)
+	    g.Assert(len(b)).Equal(16)
+	})
+    })
+
+    g.Describe("Make move on a board", func() {
+	g.It("get available spots to be 9: for 3x3 board", func(){
+           // g.Assert(board.GetAvailableSpots()).Equal(9)
+       })
+
+
+	g.It("makes move on position i", func(){
+	  // position := 5
+	  // symbol := "x"   
+	  // g.Assert(board.MakeMove(position, symbol)).Equal(3)
+	})
+    })
+}
