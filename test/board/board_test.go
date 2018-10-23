@@ -349,6 +349,47 @@ func Test(t *testing.T) {
 
            g.Assert(e.WinningCombination()).Equal(false)
          })
+
+         g.It(" set up a tie game", func(){
+        
+           newBoard := board.Board{
+              Size: 3,
+	   }
+           b := newBoard.Create()
+           
+	   c, _ := b.MakeMove(0, "x")
+	   d, _ := c.MakeMove(1, "x")
+	   e, _ := d.MakeMove(2, "o")
+	   f, _ := e.MakeMove(3, "o")
+	   m, _ := f.MakeMove(4, "o")
+	   h, _ := m.MakeMove(5, "x")
+	   i, _ := h.MakeMove(6, "x")
+	   j, _ := i.MakeMove(7, "o")
+	   k, _ := j.MakeMove(8, "x")
+   
+          g.Assert(k.TieCombination()).Equal(true)
+         })
+
+         g.It(" set up a all board with no tie game and winning combination", func(){
+        
+           newBoard := board.Board{
+              Size: 3,
+	   }
+           b := newBoard.Create()
+           
+	   c, _ := b.MakeMove(0, "x")
+	   d, _ := c.MakeMove(1, "x")
+	   e, _ := d.MakeMove(2, "o")
+	   f, _ := e.MakeMove(3, "o")
+	   m, _ := f.MakeMove(4, "x")
+	   h, _ := m.MakeMove(5, "x")
+	   i, _ := h.MakeMove(6, "o")
+	   j, _ := i.MakeMove(7, "o")
+	   k, _ := j.MakeMove(8, "x")
+          
+          g.Assert(k.TieCombination()).Equal(false)
+          g.Assert(k.WinningCombination()).Equal(true)
+         })
    })
 }
 

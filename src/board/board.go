@@ -60,3 +60,6 @@ func (board  Board) DiagonalWinningCombination() bool {
              (board.Array[2] == board.Array[4] && board.Array[4] == board.Array[6]) 
 }
 
+func (board Board) TieCombination() bool {
+     return !board.WinningCombination() && board.AvailableSpots == 0
+}
