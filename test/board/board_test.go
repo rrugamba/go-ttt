@@ -301,6 +301,39 @@ func Test(t *testing.T) {
          })
      })
 
+     g.Describe("Check for array of available spots", func() {
+         g.It(" 3 spots filled, array should be of size 6", func(){
+        
+           newBoard := board.Board{
+              Size: 3,
+	   }
+           b := newBoard.Create()
+           
+	   c, _ := b.MakeMove(0, "x")
+	   d, _ := c.MakeMove(1, "x")
+	   e, _ := d.MakeMove(4, "x")
+
+           g.Assert(len(e.GetAvailableSpots())).Equal(6)
+           g.Assert(e.GetAvailableSpots()).Equal([]int{2,3,5,6,7,8})
+         })
+         
+         g.It(" 5 spots filled, array should be of size 4", func(){
+        
+           newBoard := board.Board{
+              Size: 3,
+	   }
+           b := newBoard.Create()
+           
+	   c, _ := b.MakeMove(0, "x")
+	   d, _ := c.MakeMove(1, "x")
+	   e, _ := d.MakeMove(4, "x")
+	   f, _ := e.MakeMove(3, "o")
+	   h, _ := f.MakeMove(5, "o")
+
+           g.Assert(len(h.GetAvailableSpots())).Equal(4)
+           g.Assert(h.GetAvailableSpots()).Equal([]int{2,6,7,8})
+         })
+    })
      g.Describe("Check winning combination for different board states", func() {
          g.It(" 3 spots filled with no winning combination", func(){
         

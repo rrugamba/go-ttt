@@ -23,6 +23,17 @@ func (board Board) FillArray(length int) []string {
      return board.Array
 }
 
+func (board Board) GetAvailableSpots() []int {
+     var arrayOfAvailableSpots []int
+     arrayLength := len(board.Array)
+     for i := 0; i < arrayLength; i++ {
+        if board.Array[i] == strconv.Itoa(i + 1) { 
+           arrayOfAvailableSpots = append(arrayOfAvailableSpots, i) 
+        }
+      }
+     return arrayOfAvailableSpots
+}
+
 func (board Board) MakeMove(position int, symbol string) (Board, error) {
     boardLength := (board.Size * board.Size)
 
