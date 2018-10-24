@@ -12,4 +12,9 @@ func (player Player) GetType() string {
   return player.Type
 }
 
-
+func (player Player) SwitchPlayer(a, b Player) Player {
+     if player.Type == a.Type {
+       return b
+     }
+     return a
+}

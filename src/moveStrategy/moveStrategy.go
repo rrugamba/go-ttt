@@ -4,15 +4,15 @@ import "../board"
 import "../player"
 import "strconv"
 
-func GetMove(a board.Board, d player.Player) int {
-    return WhoseMove(a, d)
+func GetMove(a board.Board, d player.Player, e player.Player) int {
+    return WhoseMove(a, d, e)
 }
 
-func WhoseMove(a board.Board, d player.Player) int {
+func WhoseMove(a board.Board, d player.Player,  e player.Player) int {
       if d.Type == "human" {
          return HumanMove(a)
       } else {
-         return AiMove(a, d)
+         return AiMove(a, d, e)
       }
 }
 
@@ -25,7 +25,7 @@ func HumanMove(a board.Board) int {
       return 0
 }
 
-func AiMove(a board.Board, d player.Player) int {
+func AiMove(a board.Board, d player.Player, e player.Player) int {
     availableSpots := a.GetAvailableSpots()
     var score, bestMove int
     bestScore := -100
@@ -37,7 +37,7 @@ func AiMove(a board.Board, d player.Player) int {
 
     for i := 0; i < len(availableSpots); i++ {
       currentBoardState.MakeMove(availableSpots[i], d.Symbol)
-      score = Minimax(currentBoardState, d, depth + 1)
+      score = Minimax(currentBoardState, d, e, depth + 1)
       if score > bestScore {
         bestScore = score
         bestMove = availableSpots[i]
@@ -48,7 +48,7 @@ func AiMove(a board.Board, d player.Player) int {
     return bestMove	 
 }
 
-func Minimax(a board.Board, d player.Player, depth int) int {
+func Minimax(a board.Board, d player.Player, e player.Player, depth int) int {
      if a.WinningCombination() || a.TieCombination() {
        winner := d.Symbol
        return Score(a, d, winner, depth)
@@ -64,9 +64,9 @@ func Minimax(a board.Board, d player.Player, depth int) int {
      currentBoardState := a
       
      for i := 0; i < len(availableSpots); i++ {
-        currentPlayer = SwitchPlayers(d)
+        currentPlayer = d.SwitchPlayer(d, e)
         currentBoardState.MakeMove(availableSpots[i], currentPlayer.Symbol)
-        score = -Minimax(currentBoardState, currentPlayer, depth + 1)
+        score = -Minimax(currentBoardState, currentPlayer, d, depth + 1)
         if score < leastScore {
            leastScore = score
         }
@@ -88,12 +88,3 @@ func Score(a board.Board, d player.Player, winner string, depth int) int {
      }
 }
 
-
-func SwitchPlayers(d player.Player) player.Player {
-    p1 := player.Player{Symbol: "X", Type: "human",} 
-    p2 := player.Player{Symbol: "O", Type: "ai",} 
-    if d.Type == "human" {
-        return p2
-    }
-    return p1
-}
