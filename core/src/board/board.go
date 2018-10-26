@@ -1,7 +1,9 @@
 package board
 
-import "errors"
-import "strconv"
+import (
+        "errors"
+        "strconv"
+)
 
 type Board struct {
   Size, AvailableSpots int
@@ -72,5 +74,5 @@ func (board  Board) DiagonalWinningCombination() bool {
 }
 
 func (board Board) TieCombination() bool {
-     return !board.WinningCombination() && board.AvailableSpots == 0
+     return !board.WinningCombination() && len(board.GetAvailableSpots()) == 0
 }

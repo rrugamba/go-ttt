@@ -1,4 +1,4 @@
-package test_Board
+package board_test
 
 import (
         "testing"
