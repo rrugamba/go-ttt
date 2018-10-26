@@ -1,7 +1,7 @@
-# TicTacToe - console version playable
-ttt built using golang
-
-# Set up
+# tictactoe - console version playable
+- ttt built using golang
+- only on a 3 x 3 board
+# set up
 - clone this repo
   - run `$ git clone git@github.com:rrugamba/go-ttt.git`
 
@@ -9,7 +9,7 @@ ttt built using golang
   - run `$ go version`
   - my version is: `go1.11.1 darwin/amd64`
 
-# Running tests
+# running tests
 - **core** 
    - cd into a directory for any of the packages ie board, player etc
    - run `go test` inside the specific package directory
@@ -27,7 +27,7 @@ ttt built using golang
     - `$ go test` - to run all tests for the setup package
   
 
-# Play Game
+# play game
   - **Console version**
     -  _within the cloned repo_
         - `$ cd console/src/main`
