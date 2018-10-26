@@ -5,7 +5,7 @@ import "../player"
 
 func Status(b board.Board, currentPlayer player.Player) string {
    if b.WinningCombination() {
-      return currentPlayer.Symbol + " WINS"
+      return currentPlayer.Symbol + " (" + currentPlayer.Type + ")" + " WINS"
    } else if b.TieCombination() {
       return "TIE GAME"
    }  

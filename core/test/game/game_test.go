@@ -35,7 +35,7 @@ func Test(t *testing.T) {
              d, err := e.MakeMove(2, "X")
              
 	     g.Assert(err).Equal(nil)
-             g.Assert(game.Status(d, p1)).Equal("X WINS")   
+             g.Assert(game.Status(d, p1)).Equal("X (human) WINS")   
          })
         
          g.It("game setup results into win for player 2", func() {
@@ -51,7 +51,7 @@ func Test(t *testing.T) {
              d, err := e.MakeMove(2, "O")
              
              g.Assert(err).Equal(nil) 
-             g.Assert(game.Status(d, p2)).Equal("O WINS")   
+             g.Assert(game.Status(d, p2)).Equal("O (ai) WINS")   
          })
          
         g.It("game setup results into tie game2", func() {
