@@ -28,7 +28,7 @@
   
 
 # play game
-  - **Console version**
+  - **console version**
     -  _within the cloned repo_
         - `$ cd console/src/main`
         - `$ go run main.go` - should start game options to play TTT

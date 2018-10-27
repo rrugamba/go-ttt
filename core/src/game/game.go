@@ -1,13 +1,17 @@
 package game
 
-import "../board"
-import "../player"
+import ."../board"
+import ."../player"
 
-func Status(b board.Board, currentPlayer player.Player) string {
-   if b.WinningCombination() {
-      return currentPlayer.Symbol + " (" + currentPlayer.Type + ")" + " WINS"
-   } else if b.TieCombination() {
-      return "TIE GAME"
+const WINS = " WINS"
+const TIE_GAME = "TIE GAME"
+const NO_WINNER_YET = "NO WINNER YET"
+
+func Status(board Board, currentPlayer Player) string {
+   if board.WinningCombination() {
+      return currentPlayer.Symbol + " (" + currentPlayer.Type + ")" + WINS
+   } else if board.TieCombination() {
+      return TIE_GAME
    }  
-   return "NO WINNER YET" 
+   return NO_WINNER_YET 
 }

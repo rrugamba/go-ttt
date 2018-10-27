@@ -3,14 +3,14 @@ package player_test
 import (
          "testing"
          ."github.com/franela/goblin"
-         "../../src/player"
+         ."../../src/player"
 )
 
 func Test(t *testing.T) {
      g := Goblin(t)
      g.Describe("Creating a Player", func() {
          g.It("should get the symbol and type of player", func() {
-             newPlayer := player.Player {
+             newPlayer := Player {
                Symbol: "X",
                Type: "human",
              }
@@ -19,12 +19,12 @@ func Test(t *testing.T) {
          })
 
         g.It("should get the symbol and type of other player", func() {
-             playerOne := player.Player {
+             playerOne := Player {
                Symbol: "X",
                Type: "human",
              }
 
-             playerTwo := player.Player {
+             playerTwo := Player {
                Symbol: "O",
                Type: "ai",
              }
@@ -34,12 +34,12 @@ func Test(t *testing.T) {
              g.Assert(playerOne.SwitchPlayer(playerOne, playerTwo).Type).Equal("ai")
          })
         g.It("should get the symbol and type of other player", func() {
-             playerOne := player.Player {
+             playerOne := Player {
                Symbol: "X",
                Type: "human",
              }
 
-             playerTwo := player.Player {
+             playerTwo := Player {
                Symbol: "O",
                Type: "ai",
              }

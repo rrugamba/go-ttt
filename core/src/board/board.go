@@ -1,18 +1,20 @@
 package board
 
 import (
-        "errors"
-        "strconv"
+        ."errors"
+        ."strconv"
 )
 
+const OUT_OF_RANGE_ERROR = "position is Out of Range"
+const POSITION_ALREADY_FILLED_ERROR = "position already filled"
+
 type Board struct {
-  Size, AvailableSpots int
+  Size int
   Array []string
 }
 
 func (board Board) Create() Board {
     size := board.Size
-    board.AvailableSpots = (size*size)
     board.Array = board.FillArray(size*size)
     return board
 }
@@ -20,7 +22,7 @@ func (board Board) Create() Board {
 func (board Board) FillArray(length int) []string {
      board.Array = make([]string, length)
      for i := 0; i < length; i++ {
-        board.Array[i] = strconv.Itoa(i + 1)
+        board.Array[i] = Itoa(i + 1)
      }
      return board.Array
 }
@@ -29,7 +31,7 @@ func (board Board) GetAvailableSpots() []int {
      var arrayOfAvailableSpots []int
      arrayLength := len(board.Array)
      for i := 0; i < arrayLength; i++ {
-        if board.Array[i] == strconv.Itoa(i + 1) { 
+        if board.Array[i] == Itoa(i + 1) { 
            arrayOfAvailableSpots = append(arrayOfAvailableSpots, i) 
         }
       }
@@ -40,13 +42,12 @@ func (board Board) MakeMove(position int, symbol string) (Board, error) {
     boardLength := (board.Size * board.Size)
 
     if position < 0 || position > boardLength - 1 {
-        return board, errors.New("position is Out of Range")
-    } else if board.Array[position] != strconv.Itoa(position + 1) {
-        return board, errors.New("position already filled")
+        return board, New(OUT_OF_RANGE_ERROR)
+    } else if board.Array[position] != Itoa(position + 1) {
+        return board, New(POSITION_ALREADY_FILLED_ERROR)
     }
     
     board.Array[position] = symbol
-    board.AvailableSpots--
     return board, nil
 }
 

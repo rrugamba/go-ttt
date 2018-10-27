@@ -1,7 +1,7 @@
 package main
 
-import "../play"
+import ."../play"
 
 func main() {
-   play.StartGame()
+   StartGame()
 }

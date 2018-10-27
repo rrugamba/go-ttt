@@ -1,88 +1,92 @@
 package setup
 
 import (
-        "../../../core/src/board"
-        "../../../core/src/player"
-        "fmt"
+        ."../../../core/src/board"
+        ."../../../core/src/player"
+        ."fmt"
         "bufio"
-        "os"
+        ."os"
         "strings"
 )
 
 func GetPlayerSymbol() string {
-    reader := bufio.NewReader(os.Stdin)
-    fmt.Print("\nSymbol: ")
+    reader := bufio.NewReader(Stdin)
+    Print("Symbol: ")
     symbol, _ := reader.ReadString('\n')
     symbol = strings.TrimSuffix(symbol, "\n")
     return strings.ToUpper(symbol)    
 }
 
 func GetPlayerType() string {
-    fmt.Println("1. human")
-    fmt.Println("2. ai")
+    Print("Type: ")
+    Print("(1) human. ")
+    Print("(2) ai. :")
     var choosenValue int
-    fmt.Scan(&choosenValue)
+    Scan(&choosenValue)
+    Println("------")
     return Type(choosenValue)
 }
 
 func Type(input int) string {
      switch input {
      case 1:
-         return "human"
+         return HUMAN
      case 2:
-         return "ai"
+         return AI
      default:
          return GetPlayerType()
      }
 }
  
-func GetOtherPlayer(p player.Player) player.Player {
-    fmt.Print("Second Player \n")
+func GetOtherPlayer(player Player) Player {
+    Print("Player 2 \n")
     symbol := GetPlayerSymbol()
    
-    for symbol == p.Symbol {
+    for symbol == player.Symbol {
        symbol = GetPlayerSymbol()
     }
     
-    switch p.Type {
-    case "human": 
-       return player.Player {Symbol: symbol, Type: Type(2),}
+    switch player.Type {
+    case HUMAN: 
+       return Player {Symbol: symbol, Type: Type(2),}
     default:
-       return player.Player {Symbol: symbol, Type: Type(1),}
+       return Player {Symbol: symbol, Type: Type(1),}
     }
 }
 
-func WhoPlaysFirst(p1 player.Player, p2 player.Player) player.Player {
-    fmt.Println("Who Plays First? human or ai?")
-    fmt.Println("1. human")
-    fmt.Println("2. ai")
+func WhoPlaysFirst(p1 Player, p2 Player) Player {
+    Println("Who Plays First? 1 or 2?")
+    Println("1. human")
+    Print("2. ai : ")
     var choosenValue int
-    fmt.Scan(&choosenValue)
+    Scan(&choosenValue)
     return GetFirstPlayer(p1, p2, choosenValue)
 }
 
-func GetFirstPlayer(p1 player.Player, p2 player.Player, input int) player.Player {
-    if (input == 1 && p1.Type == "human") || (input == 2 && p1.Type == "ai") {
+func GetFirstPlayer(p1 Player, p2 Player, input int) Player {
+    if (input == 1 && p1.Type == HUMAN) || (input == 2 && p1.Type == AI) {
        return p1
-    } else if (input == 1 && p2.Type == "human") || (input == 2 && p2.Type == "ai") { 
+    } else if (input == 1 && p2.Type == HUMAN) || (input == 2 && p2.Type == AI) { 
        return p2
     }  else {
        return WhoPlaysFirst(p1, p2)
     }
 }
 
-func SetUp() (board.Board, player.Player, player.Player) {
-     b := board.Board {Size: 3,}
-     newBoard := b.Create()
+func SetUp() (Board, Player, Player) {
+    b := Board {Size: 3,}
+    newBoard := b.Create()
  
-    fmt.Println("Player 1: ")
-    s := GetPlayerSymbol()
+    Println("Player 1: ")
+    symbol := GetPlayerSymbol()
 
-    typo := GetPlayerType()
+    pType := GetPlayerType()
 
-    player1 := player.Player{Symbol: s, Type: typo,}
+    player1 := Player{Symbol: symbol, Type: pType,}
     player2 := GetOtherPlayer(player1)
-
+    Println("Type: " + player2.Type)
+    Println("------")
+ 
     firstPlayer := WhoPlaysFirst(player1, player2)
     otherPlayer := firstPlayer.SwitchPlayer(player1, player2) 
 

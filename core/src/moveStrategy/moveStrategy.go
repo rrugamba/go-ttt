@@ -1,12 +1,11 @@
 package moveStrategy
 
 import (
-        "../board"
-        "../player"
+        ."../board"
+        ."../player"
 )
 
-func AiMove(a board.Board, d player.Player, e player.Player) int {
-    
+func AiMove(a Board, d Player, e Player) int {
     availableSpots := a.GetAvailableSpots()
     var score, bestMove int
     bestScore := -100
@@ -26,17 +25,18 @@ func AiMove(a board.Board, d player.Player, e player.Player) int {
        currentBoardState.Array = make([]string, len(a.Array))
        copy(currentBoardState.Array, boardCopy)
     }
-      
+
+    copy(a.Array, boardCopy)  
     return bestMove	 
 }
 
-func Minimax(a board.Board, d player.Player, e player.Player, depth int) int {
+func Minimax(a Board, d Player, e Player, depth int) int {
      if a.WinningCombination() || a.TieCombination() {
        winner := d.Symbol
        return Score(a, d, winner, depth)
      }
   
-     var currentPlayer player.Player
+     var currentPlayer Player
      var score int
      leastScore := 100
      availableSpots := a.GetAvailableSpots()
@@ -56,10 +56,11 @@ func Minimax(a board.Board, d player.Player, e player.Player, depth int) int {
         copy(currentBoardState.Array, boardCopy)
       }
  
-      return leastScore
+    copy(a.Array, boardCopy)  
+    return leastScore
 }
 
-func Score(a board.Board, d player.Player, winner string, depth int) int {
+func Score(a Board, d Player, winner string, depth int) int {
      if a.WinningCombination() && winner == d.Symbol {
         return 10/depth
      } else if a.WinningCombination() && winner != d.Symbol {

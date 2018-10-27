@@ -1,5 +1,8 @@
 package player
 
+const HUMAN = "human"
+const AI = "ai"
+
 type Player struct {
    Symbol, Type string
 }
