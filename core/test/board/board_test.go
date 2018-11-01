@@ -141,7 +141,7 @@ func Test(t *testing.T) {
 	   e, err := d.MakeMove(2, "x")
            g.Assert(err).Equal(nil)
 
-           g.Assert(e.HorizontalWinningCombination()).Equal(true)
+           g.Assert(e.WinningCombination()).Equal(true)
          })
 
          g.It("2nd horizontal winning combination", func(){
@@ -160,7 +160,7 @@ func Test(t *testing.T) {
 	   e, err := d.MakeMove(5, "x")
            g.Assert(err).Equal(nil)
 
-           g.Assert(e.HorizontalWinningCombination()).Equal(true)
+           g.Assert(e.WinningCombination()).Equal(true)
          })
 
          g.It("3rd horizontal winning combination", func(){
@@ -178,7 +178,7 @@ func Test(t *testing.T) {
     
 	   e, err := d.MakeMove(8, "x")
            g.Assert(err).Equal(nil)
-           g.Assert(e.HorizontalWinningCombination()).Equal(true)
+           g.Assert(e.WinningCombination()).Equal(true)
          })
 
          g.It("1st [vertical] winning combination", func(){
@@ -196,7 +196,7 @@ func Test(t *testing.T) {
     
 	   e, err := d.MakeMove(6, "x")
            g.Assert(err).Equal(nil)
-           g.Assert(e.VerticalWinningCombination()).Equal(true)
+           g.Assert(e.WinningCombination()).Equal(true)
          })
 
          g.It("2nd vertical winning combination", func(){
@@ -214,7 +214,7 @@ func Test(t *testing.T) {
     
 	   e, err := d.MakeMove(7, "x")
            g.Assert(err).Equal(nil)
-           g.Assert(e.VerticalWinningCombination()).Equal(true)
+           g.Assert(e.WinningCombination()).Equal(true)
          })
 
          g.It("3rd vertical winning combination", func(){
@@ -232,7 +232,7 @@ func Test(t *testing.T) {
     
 	   e, err := d.MakeMove(8, "x")
            g.Assert(err).Equal(nil)
-           g.Assert(e.VerticalWinningCombination()).Equal(true)
+           g.Assert(e.WinningCombination()).Equal(true)
          })
 
          g.It("1st [diagonal] winning combination", func(){
@@ -250,7 +250,7 @@ func Test(t *testing.T) {
     
 	   e, err := d.MakeMove(8, "x")
            g.Assert(err).Equal(nil)
-           g.Assert(e.DiagonalWinningCombination()).Equal(true)
+           g.Assert(e.WinningCombination()).Equal(true)
          })
 
          g.It("2nd diagonal winning combination", func(){
@@ -268,7 +268,7 @@ func Test(t *testing.T) {
     
 	   e, err := d.MakeMove(6, "x")
            g.Assert(err).Equal(nil)
-           g.Assert(e.DiagonalWinningCombination()).Equal(true)
+           g.Assert(e.WinningCombination()).Equal(true)
          })
      })
 

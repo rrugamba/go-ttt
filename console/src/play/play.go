@@ -7,30 +7,31 @@ import (
         ."../../../core/src/player"
         ."../setup"
         ."fmt"
+        "time"
 )
 
 func StartGame() {
-     PrintStartOptions()
+     printStartOptions()
 
      var choice int
      Scan(&choice)
      
-     PlayOrQuit(choice)
+     playOrQuit(choice)
 }
 
-func PrintStartOptions() {
+func printStartOptions() {
      Println("\n")
      Println("1. Start Game")
      Println("2. Quit")
 }
 
-func PlayOrQuit(choice int) {     
+func playOrQuit(choice int) {     
      switch choice {
      case 1:
         Println("--------")   
         board, firstPlayer, otherPlayer := SetUp()
         PrintBoard(board)
-        Play(board, firstPlayer, otherPlayer)
+        play(board, firstPlayer, otherPlayer)
      case 2:
         Println("GoodBye...")
      default:
@@ -39,33 +40,34 @@ func PlayOrQuit(choice int) {
 }
 
 func PrintBoard(b Board) {
-   Println("------")
-   Println(b.Array[0] + " " + b.Array[1] + " " + b.Array[2] )
-   Println(b.Array[3] + " " + b.Array[4] + " " + b.Array[5] )
-   Println(b.Array[6] + " " + b.Array[7] + " " + b.Array[8] )
-   Println("------")
+   Println("-------")
+   Println(b.Array[0] + "  " + b.Array[1] + "  " + b.Array[2]) 
+   Println(b.Array[3] + "  " + b.Array[4] + "  " + b.Array[5])
+   Println(b.Array[6] + "  " + b.Array[7] + "  " + b.Array[8]) 
+   Println("-------")
 }
 
-func Play(b Board, firstPlayer Player, otherPlayer Player) {
-    position := GetMove(b, firstPlayer, otherPlayer)
+func play(b Board, firstPlayer Player, otherPlayer Player) {
+    position := getMove(b, firstPlayer, otherPlayer)
     c := validateMove(b, position, firstPlayer)
     PrintBoard(c)
-    CheckGameStatus(c, firstPlayer, otherPlayer)
+    checkGameStatus(c, firstPlayer, otherPlayer)
 }
 
-func GetMove(b Board, firstPlayer Player, otherPlayer Player) int { 
+func getMove(b Board, firstPlayer Player, otherPlayer Player) int { 
     var position int
     switch firstPlayer.Type {
     case HUMAN:
-       position = GetHumanMove()
+       position = getHumanMove()
     default:
        Println("Ai Move")
+       time.Sleep(2000 * time.Millisecond)
        position = AiMove(b, firstPlayer, otherPlayer)
     }
     return position
 }
 
-func GetHumanMove() int {
+func getHumanMove() int {
     Print("\nEnter Move :")
     var move int
     Scan(&move)
@@ -77,19 +79,19 @@ func validateMove(b Board, position int, firstPlayer Player) Board {
     c, err := b.MakeMove(position, firstPlayer.Symbol)
     for err != nil {
        Print(err)
-       position = GetHumanMove()
+       position = getHumanMove()
        c, err = b.MakeMove(position, firstPlayer.Symbol)
     }
     return c
 }
 
-func CheckGameStatus(b Board, firstPlayer Player, otherPlayer Player) {
+func checkGameStatus(b Board, firstPlayer Player, otherPlayer Player) {
     status := Status(b, firstPlayer)
     switch status {
     case NO_WINNER_YET:
        currentPlayer := firstPlayer.SwitchPlayer(firstPlayer, otherPlayer)
        otherPlayer = firstPlayer
-       Play(b, currentPlayer, otherPlayer)
+       play(b, currentPlayer, otherPlayer)
     default:
        Print(status)
        StartGame()

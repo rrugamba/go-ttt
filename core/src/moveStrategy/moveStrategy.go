@@ -17,7 +17,7 @@ func AiMove(a Board, d Player, e Player) int {
 
     for i := 0; i < len(availableSpots); i++ {
        currentBoardState.MakeMove(availableSpots[i], d.Symbol)
-       score = Minimax(currentBoardState, d, e, depth + 1)
+       score = minimax(currentBoardState, d, e, depth + 1)
        if score > bestScore {
          bestScore = score
          bestMove = availableSpots[i]
@@ -30,10 +30,10 @@ func AiMove(a Board, d Player, e Player) int {
     return bestMove	 
 }
 
-func Minimax(a Board, d Player, e Player, depth int) int {
+func minimax(a Board, d Player, e Player, depth int) int {
      if a.WinningCombination() || a.TieCombination() {
        winner := d.Symbol
-       return Score(a, d, winner, depth)
+       return score(a, d, winner, depth)
      }
   
      var currentPlayer Player
@@ -48,7 +48,7 @@ func Minimax(a Board, d Player, e Player, depth int) int {
      
      for i := 0; i < len(availableSpots); i++ {
         currentBoardState.MakeMove(availableSpots[i], currentPlayer.Symbol)
-        score = -Minimax(currentBoardState, currentPlayer, d, depth + 1)
+        score = -minimax(currentBoardState, currentPlayer, d, depth + 1)
         if score < leastScore {
            leastScore = score
         }
@@ -60,7 +60,7 @@ func Minimax(a Board, d Player, e Player, depth int) int {
     return leastScore
 }
 
-func Score(a Board, d Player, winner string, depth int) int {
+func score(a Board, d Player, winner string, depth int) int {
      if a.WinningCombination() && winner == d.Symbol {
         return 10/depth
      } else if a.WinningCombination() && winner != d.Symbol {
