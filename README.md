@@ -1,28 +1,40 @@
 # tictactoe - console version playable
 - ttt built using golang
 - only on a 3 x 3 board
+
 # set up
-- clone this repo
-  - run `$ git clone git@github.com:rrugamba/go-ttt.git`
+- if installing go for the first time, 
+  - follow these [mac installation instructions](https://jjude.com/golang-on-macosx/)
 
 - to check your go version
   - run `$ go version`
   - my version is: `go1.11.1 darwin/amd64`
+  
+- clone this repo into your go directory you set up from the installation instructions
+  - run `$ git clone git@github.com:rrugamba/go-ttt.git`
 
 # running tests
 - **core** 
-   - cd into a directory for any of the packages ie board, player etc
-   - run `go test` inside the specific package directory
-   - forexample (within cloned repo):
-     - to run board tests 
-        - `$ cd core/src/board`
-        - `$ go test` - to run all tests for the board package
-     - to run moveStrategy tests
-        - `$ cd core/src/moveStrategy`
-        - `$ go test` - to run all tests for the moveStrategy package
+   - to run all tests
+     - inside the `core/test` directory
+     - run `$ go test ./...`
+   
+   - to run unit tests for packages
+      - run `go test` inside the specific package directory
+      - forexample (within cloned repo):
+        - to run board tests 
+          - `$ cd core/test/board`
+          - `$ go test` - to run all tests for the board package
+        - to run moveStrategy tests
+          - `$ cd core/test/moveStrategy`
+          - `$ go test` - to run all tests for the moveStrategy package
 
 - **console**
-  - _within cloned repo
+  - to run all tests
+    - inside the `console/test` directory
+    - run `$ go test ./...`
+    
+  - to run unit tests for packages
     - `$ cd console/test/setup`
     - `$ go test` - to run all tests for the setup package
   
