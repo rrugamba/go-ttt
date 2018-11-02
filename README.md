@@ -3,16 +3,26 @@
 - only on a 3 x 3 board
 
 # set up
-- if installing go for the first time, 
-  - follow these [mac installation instructions](https://jjude.com/golang-on-macosx/)
-
 - to check your go version
   - run `$ go version`
   - my version is: `go1.11.1 darwin/amd64`
   
-- clone this repo into your go directory you set up from the installation instructions
+- clone this repo 
   - run `$ git clone git@github.com:rrugamba/go-ttt.git`
 
+- add these lines in the `.bash_profile`
+  ```
+  export GOPATH=$HOME/path_to_your_cloned_repo
+  export GOROOT=/usr/local/opt/go/libexec
+  export PATH=$PATH:$GOPATH/bin
+  export PATH=$PATH:$GOROOT/bin
+  ```
+# get project dependencies
+- navigate to your root directory
+  - run `$ cd /`
+  - then `$ cd usr/local/opt/go/libexec/src/`
+  - then `$ go get github.com/franela/goblin`
+  
 # running tests
 - **core** 
    - to run all tests
@@ -21,13 +31,12 @@
    
    - to run unit tests for packages
       - run `go test` inside the specific package directory
-      - forexample (within cloned repo):
-        - to run board tests 
-          - `$ cd core/test/board`
-          - `$ go test` - to run all tests for the board package
-        - to run moveStrategy tests
-          - `$ cd core/test/moveStrategy`
-          - `$ go test` - to run all tests for the moveStrategy package
+      - forexample to run board tests 
+        - `$ cd core/test/board`
+        - `$ go test` - to run all tests for the board package
+      - to run moveStrategy tests
+        - `$ cd core/test/moveStrategy`
+        - `$ go test` - to run all tests for the moveStrategy package
 
 - **console**
   - to run all tests
